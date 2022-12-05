@@ -29,6 +29,15 @@ app.get("/api/users", (req, res) => {
 // /api/users/1      <-- path param (req.params.id)
 // /api/users?id=1   <-- query param (req.query.id) If you go with query param, just modify the existing endpoint above instead of creating a new endpoint
 
+app.get("/api/users/:id", (req, res) => {
+  const singleUser = data.find((usr) => {return usr.id === Number(req.params.id)});
+  if (singleUser){
+    res.json(singleUser);
+  } else {
+    res.sendStatus(404).end()
+  }
+});
+
 // BONUS QUESTION - Add routes to implement all the CRUD operations (POST, PUT, DELETE)
 
 app.listen(3000, () => {
